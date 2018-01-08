@@ -24,13 +24,19 @@ RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linu
 
 # Setup Rust
 
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly-2017-11-22 -y
+ARG RUST_VERSION
+
+ARG CLIPPY_VERSION
+
+ARG RUSTFMT_VERSION
+
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain $RUST_VERSION -y
 
 ENV PATH=/root/.cargo/bin:$PATH
 
-RUN cargo install clippy --vers 0.0.174
+RUN cargo install clippy --vers $CLIPPY_VERSION
 
-RUN cargo install rustfmt-nightly --vers 0.2.16
+RUN cargo install rustfmt-nightly --vers $RUSTFMT_VERSION
 
 VOLUME /work
 

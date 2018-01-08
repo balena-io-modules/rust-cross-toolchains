@@ -10,7 +10,11 @@ stable_rust: &stable_rust
 
     - setup_remote_docker
 
-    - run: docker build --build-arg RUST_VERSION=$RUST_VERSION -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION rust-$CIRCLE_JOB
+    - run: >-
+      docker build
+      --build-arg RUST_VERSION=$RUST_VERSION
+      -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION
+      rust-$CIRCLE_JOB
 
 
 version: 2
@@ -31,13 +35,36 @@ jobs:
   amd64:
     <<: *stable_rust
 
+  test-deploy:
+    docker:
+      - image: circleci/python:latest
+
+        environment:
+          RUST_VERSION: nightly-2018-01-08
+          CLIPPY_VERSION: 0.0.178
+          RUSTFMT_VERSION: 0.3.4
+
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run: >-
+        docker build
+        --build-arg RUST_VERSION=$RUST_VERSION
+        --build-arg CLIPPY_VERSION=$CLIPPY_VERSION
+        --build-arg RUSTFMT_VERSION=$RUSTFMT_VERSION
+        -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION
+        rust-$CIRCLE_JOB
+
 
 workflows:
   version: 2
-  stable-rust:
+  build:
     jobs:
       - aarch64
       - rpi
       - armv7hf
       - i386
       - amd64
+      - test-deploy
