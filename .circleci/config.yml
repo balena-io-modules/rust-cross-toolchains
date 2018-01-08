@@ -11,10 +11,10 @@ stable_rust: &stable_rust
     - setup_remote_docker
 
     - run: >-
-      docker build
-      --build-arg RUST_VERSION=$RUST_VERSION
-      -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION
-      rust-$CIRCLE_JOB
+        docker build
+        --build-arg RUST_VERSION=$RUST_VERSION
+        -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION
+        rust-$CIRCLE_JOB
 
 
 version: 2
@@ -50,12 +50,12 @@ jobs:
       - setup_remote_docker
 
       - run: >-
-        docker build
-        --build-arg RUST_VERSION=$RUST_VERSION
-        --build-arg CLIPPY_VERSION=$CLIPPY_VERSION
-        --build-arg RUSTFMT_VERSION=$RUSTFMT_VERSION
-        -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION
-        rust-$CIRCLE_JOB
+          docker build
+          --build-arg RUST_VERSION=$RUST_VERSION
+          --build-arg CLIPPY_VERSION=$CLIPPY_VERSION
+          --build-arg RUSTFMT_VERSION=$RUSTFMT_VERSION
+          -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION
+          rust-$CIRCLE_JOB
 
 
 workflows:
