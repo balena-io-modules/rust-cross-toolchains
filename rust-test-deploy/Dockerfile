@@ -11,6 +11,7 @@ RUN apt-get update && \
     g++ \
     libc6-dev \
     pkg-config \
+    make \
     libdbus-1-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
