@@ -21,7 +21,9 @@ RUN ln -s /usr/bin/strip /usr/bin/cross-strip
 
 # Setup Rust for x86_32 cross-compilation
 
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+ARG RUST_VERSION
+
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain ${RUST_VERSION} -y
 
 ENV PATH=/root/.cargo/bin:$PATH
 

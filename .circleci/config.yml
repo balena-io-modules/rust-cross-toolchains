@@ -1,9 +1,41 @@
+stable_rust: &stable_rust
+  docker:
+    - image: circleci/python:latest
+
+      environment:
+        RUST_VERSION: 1.23.0
+
+  steps:
+    - checkout
+
+    - run: docker build --build-arg RUST_VERSION=$RUST_VERSION -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION rust-$CIRCLE_JOB
+
+
 version: 2
+
 jobs:
-  build:
-    docker:
-      - image: circleci/python:latest
-    steps:
-      - checkout
-      - run: pwd
-      - run: ls -al
+  aarch64:
+    <<: *stable_rust
+
+  rpi:
+    <<: *stable_rust
+
+  armv7hf:
+    <<: *stable_rust
+
+  i386:
+    <<: *stable_rust
+
+  amd64:
+    <<: *stable_rust
+
+
+workflows:
+  version: 2
+  stable-rust:
+    jobs:
+      - aarch64
+      - rpi
+      - armv7hf
+      - i386
+      - amd64

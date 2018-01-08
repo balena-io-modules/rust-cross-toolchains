@@ -17,7 +17,11 @@ RUN apt-get update && \
 RUN ln -s /usr/bin/strip /usr/bin/cross-strip
 
 
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+# Setup Rust for x86_64 compilation
+
+ARG RUST_VERSION
+
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain ${RUST_VERSION} -y
 
 ENV PATH=/root/.cargo/bin:$PATH
 
