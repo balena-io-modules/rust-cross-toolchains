@@ -36,7 +36,7 @@ ENV PATH=/root/.cargo/bin:$PATH
 
 RUN cargo install clippy --vers $CLIPPY_VERSION
 
-RUN cargo install rustfmt-nightly --vers $RUSTFMT_VERSION
+RUN cargo install rustfmt-nightly --vers $RUSTFMT_VERSION --force
 
 VOLUME /work
 
