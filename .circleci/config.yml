@@ -5,4 +5,5 @@ jobs:
       - image: circleci/python:latest
     steps:
       - checkout
-      - run: echo "Hello, World!"
+      - run: pwd
+      - run: ls -al
