@@ -56,7 +56,7 @@ ENV PKG_CONFIG_ALLOW_CROSS=1 \
 # Get the ARMv6 libdbus-1-dev package from Raspbian, extract it to sysroot and overwrite its pkg-config.
 
 RUN cd $SYSROOT && \
-    curl --remote-name http://mirrordirector.raspbian.org/raspbian/pool/main/d/dbus/libdbus-1-dev_1.8.22-0+deb8u1_armhf.deb && \
+    curl -L --remote-name http://mirrordirector.raspbian.org/raspbian/pool/main/d/dbus/libdbus-1-dev_1.8.22-0+deb8u1_armhf.deb && \
     ar p libdbus-1-dev_1.8.22-0+deb8u1_armhf.deb data.tar.xz | tar xJ
 
 RUN printf 'prefix=/root/sysroot/usr\n\
