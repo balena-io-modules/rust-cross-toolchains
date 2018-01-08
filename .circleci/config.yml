@@ -8,6 +8,8 @@ stable_rust: &stable_rust
   steps:
     - checkout
 
+    - setup_remote_docker
+
     - run: docker build --build-arg RUST_VERSION=$RUST_VERSION -t $DOCKER_USERNAME/rust-$CIRCLE_JOB:rust-$RUST_VERSION rust-$CIRCLE_JOB
 
 
