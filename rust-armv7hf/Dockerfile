@@ -7,6 +7,7 @@ RUN apt-get update && \
     ca-certificates \
     curl \
     git \
+    openssh-client \
     gcc \
     libc6-dev \
     pkg-config

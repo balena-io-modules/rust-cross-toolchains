@@ -8,6 +8,7 @@ RUN dpkg --add-architecture i386 && \
     ca-certificates \
     curl \
     git \
+    openssh-client \
     gcc \
     libc6-dev \
     pkg-config \
