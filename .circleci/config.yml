@@ -7,7 +7,6 @@ stable_rust: &stable_rust
 
   steps:
     - checkout
-
     - setup_remote_docker
 
     - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -26,19 +25,14 @@ version: 2
 jobs:
   aarch64:
     <<: *stable_rust
-
   rpi:
     <<: *stable_rust
-
   armv7hf:
     <<: *stable_rust
-
   i386:
     <<: *stable_rust
-
   amd64:
     <<: *stable_rust
-
   test-deploy:
     docker:
       - image: circleci/python:latest
@@ -50,7 +44,6 @@ jobs:
 
     steps:
       - checkout
-
       - setup_remote_docker
 
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
