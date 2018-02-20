@@ -3,7 +3,7 @@ stable_rust: &stable_rust
     - image: circleci/python:latest
 
       environment:
-        RUST_VERSION: 1.23.0
+        RUST_VERSION: 1.24.0
 
   steps:
     - checkout
@@ -38,9 +38,8 @@ jobs:
       - image: circleci/python:latest
 
         environment:
-          RUST_VERSION: nightly-2018-01-08
-          CLIPPY_VERSION: 0.0.178
-          RUSTFMT_VERSION: 0.3.4
+          RUST_VERSION: nightly-2018-02-19
+          CLIPPY_VERSION: 0.0.186
 
     steps:
       - checkout

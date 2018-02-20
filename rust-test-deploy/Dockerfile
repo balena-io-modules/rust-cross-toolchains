@@ -29,15 +29,13 @@ ARG RUST_VERSION
 
 ARG CLIPPY_VERSION
 
-ARG RUSTFMT_VERSION
-
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain $RUST_VERSION -y
 
 ENV PATH=/root/.cargo/bin:$PATH
 
 RUN cargo install clippy --vers $CLIPPY_VERSION
 
-RUN cargo install rustfmt-nightly --vers $RUSTFMT_VERSION --force
+RUN rustup component add rustfmt-preview
 
 VOLUME /work
 
