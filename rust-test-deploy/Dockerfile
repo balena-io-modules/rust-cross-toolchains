@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 RUN apt-get update && \
     apt-get install  -y --no-install-recommends \
@@ -12,7 +12,8 @@ RUN apt-get update && \
     libc6-dev \
     pkg-config \
     make \
-    libdbus-1-dev && \
+    libdbus-1-dev \
+    libssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

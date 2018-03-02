@@ -51,7 +51,6 @@ jobs:
           docker build
           --build-arg RUST_VERSION=$RUST_VERSION
           --build-arg CLIPPY_VERSION=$CLIPPY_VERSION
-          --build-arg RUSTFMT_VERSION=$RUSTFMT_VERSION
           -t $DOCKER_USER/rust-$CIRCLE_JOB:rust-$RUST_VERSION
           rust-$CIRCLE_JOB
 
