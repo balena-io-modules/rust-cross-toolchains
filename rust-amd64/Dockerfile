@@ -2,6 +2,8 @@ FROM majorz/rust-amd64:rust-1.23.0
 
 # Setup Rust for x86_64 compilation
 
+ARG RUST_VERSION
+
 ENV PATH=/root/.cargo/bin:$PATH
 
 RUN rustup self uninstall -y
