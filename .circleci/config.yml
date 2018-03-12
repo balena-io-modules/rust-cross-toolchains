@@ -3,7 +3,7 @@ stable_rust: &stable_rust
     - image: circleci/python:latest
 
       environment:
-        RUST_VERSION: 1.24.0
+        RUST_VERSION: 1.24.1
 
   steps:
     - checkout
@@ -20,26 +20,13 @@ stable_rust: &stable_rust
     - run: docker push $DOCKER_USER/rust-$CIRCLE_JOB:rust-$RUST_VERSION
 
 
-version: 2
-
-jobs:
-  aarch64:
-    <<: *stable_rust
-  rpi:
-    <<: *stable_rust
-  armv7hf:
-    <<: *stable_rust
-  i386:
-    <<: *stable_rust
-  amd64:
-    <<: *stable_rust
-  test-deploy:
+nightly_rust: &nightly_rust
     docker:
       - image: circleci/python:latest
 
         environment:
-          RUST_VERSION: nightly-2018-02-19
-          CLIPPY_VERSION: 0.0.186
+          RUST_VERSION: nightly-2018-03-07
+          CLIPPY_VERSION: 0.0.187
 
     steps:
       - checkout
@@ -57,11 +44,31 @@ jobs:
       - run: docker push $DOCKER_USER/rust-$CIRCLE_JOB:rust-$RUST_VERSION
 
 
+version: 2
+
+jobs:
+  aarch64:
+    <<: *stable_rust
+  rpi:
+    <<: *stable_rust
+  armv7hf:
+    <<: *stable_rust
+  i386:
+    <<: *stable_rust
+  amd64:
+    <<: *stable_rust
+  test-deploy:
+    <<: *nightly_rust
+  test-deploy-systemd:
+    <<: *nightly_rust
+
+
 workflows:
   version: 2
   build:
     jobs:
       - test-deploy
+      - test-deploy-systemd
       - aarch64
       - rpi
       - armv7hf
