@@ -1,5 +1,14 @@
 FROM majorz/rust-aarch64:rust-1.23.0
 
+ARG CROSS_TRIPLE=aarch64-linux-gnu
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    make \
+    libssl-dev:arm64 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Setup Rust for AArch64 cross-compilation
 
 ARG RUST_VERSION

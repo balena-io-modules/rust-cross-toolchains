@@ -1,5 +1,12 @@
 FROM majorz/rust-amd64:rust-1.23.0
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    make \
+    libssl-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Setup Rust for x86_64 compilation
 
 ARG RUST_VERSION
